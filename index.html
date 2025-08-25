@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gelcoat</title>
+</head>
+<body>
+<h4>Gelcoat amarillo isoftalico:</h4>
+<form id="KgNeed">
+    <label for="numero">Cantidad necesaria (Kg):</label>
+    <input type="number" id="numero" name="numero">
+    <input type="submit" value="Enviar">
+</form>
+<p id="resultadoCobalto"></p>
+<p id="resultadoTitanio"></p>
+<p id="resultadoAmarillo"></p>
+<p id="resultadoTinuvin"></p>
+<p id="resultadoCabosil"></p>
+<p id="resultadoFaltante"></p>
+<script>
+    // Declaramos la variable para multiplicar
+    let factorCobalto = 0.004;
+    let factorTitanio = 0.02;
+    let factorAmarillo = 0.02;
+    let factorTinuvin = 0.003;
+    let factorCabosil = 0.04;
+
+    // Seleccionamos el formulario
+    const formulario = document.getElementById("KgNeed");
+
+    // Cuando se envíe el formulario
+    formulario.addEventListener("submit", function(event){
+        event.preventDefault(); // Evita que la página se recargue
+
+        // Tomamos el valor ingresado en el input de número
+        let numero = Number(document.getElementById("numero").value);
+
+        // Hacemos la multiplicación
+        let resultadoCobalto = numero * factorCobalto;
+        let resultadoTitanio = numero * factorTitanio;
+        let resultadoAmarillo = numero * factorAmarillo;
+        let resultadoTinuvin = numero * factorTinuvin;
+        let resultadoCabosil = numero * factorCabosil;
+        let resultadoFaltante = 1 - (factorCobalto + factorTitanio + factorAmarillo + factorTinuvin + factorCabosil)
+
+        // Mostramos el resultado en la página
+        document.getElementById("resultadoCobalto").innerText = "Cobalto (" + (factorCobalto * 100) + "%): " +resultadoCobalto.toFixed(3) + " kg";
+        document.getElementById("resultadoTitanio").innerText = "Dioxido de Titanio (" + (factorTitanio * 100) + "%): " +resultadoTitanio.toFixed(3) + " kg";
+        document.getElementById("resultadoAmarillo").innerText = "Pigmento Amarillo (" + (factorAmarillo * 100) + "%): " +resultadoAmarillo.toFixed(3) + " kg";
+        document.getElementById("resultadoTinuvin").innerText = "Tinuvin (" + (factorTinuvin * 100) + "%): " +resultadoTinuvin.toFixed(3) + " kg";
+        document.getElementById("resultadoCabosil").innerText = "Cabosil (" + (factorCabosil * 100) + "%): " +resultadoCabosil.toFixed(3) + " kg";
+        document.getElementById("resultadoFaltante").innerText = "Faltante: " + (resultadoFaltante * 100) + " %";
+    });
+</script>
+
+</body>
+</html>
